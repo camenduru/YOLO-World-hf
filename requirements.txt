@@ -1,5 +1,5 @@
-torch
-torchvision
+torch==2.0.1
+torchvision==0.15.2
 openmim
 mmcv>=2.0.0rc4,<2.1.0
 mmdet>=3.0.0
