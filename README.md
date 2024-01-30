@@ -6,6 +6,7 @@ colorTo: blue
 sdk: docker
 pinned: false
 license: apache-2.0
+app_file: app.py
 ---
 
 <div align="center">
