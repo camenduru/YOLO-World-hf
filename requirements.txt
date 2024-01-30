@@ -16,5 +16,4 @@ regex
 pot
 sentencepiece
 tokenizers
-/home/user/app
 
