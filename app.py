@@ -1,3 +1,11 @@
+import os
+os.system("pip uninstall mmcv-full")
+os.system("mim install 'mmengine>=0.6.0'")
+os.system("mim install 'mmcv>=2.0.0rc4,<2.1.0'")
+os.system("mim install 'mmdet>=3.0.0,<4.0.0'")
+os.system("mim install 'mmyolo'")
+os.system("pip install -e .")
+
 import argparse
 import os.path as osp
 
