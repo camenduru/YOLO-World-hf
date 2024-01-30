@@ -1,7 +1,7 @@
 torch
 torchvision
 openmim
-mmengine
+mmcv
 mmdet
 mmyolo
 gradio
@@ -16,4 +16,7 @@ regex
 pot
 sentencepiece
 tokenizers
+onnx
+onnx-runtime
+onnx-simplifier
 
