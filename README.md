@@ -1,3 +1,13 @@
+---
+title: YOLO World
+emoji: 🔥
+colorFrom: pink
+colorTo: blue
+sdk: docker
+pinned: false
+license: apache-2.0
+---
+
 <div align="center">
 <center>
 <img width=500px src="./assets/yolo_logo.png">
