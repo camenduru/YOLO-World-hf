@@ -1,7 +1,7 @@
 torch
 torchvision
 openmim
-mmcv==2.0.0rc4
+mmcv-full==2.0.0rc4
 mmdet
 mmyolo
 gradio
