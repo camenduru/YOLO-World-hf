@@ -1,8 +1,9 @@
 torch
 torchvision
 openmim
-mmcv-full==2.0.0rc4
-mmdet
+mmcv>=2.0.0rc4,<2.1.0
+mmdet>=3.0.0
+mmengine>=0.7.1
 mmyolo
 gradio
 transformers
