@@ -1,0 +1,51 @@
+#!/bin/bash
+if [ ! -n "$SH" ]; then
+    #export NCCL_IB_GID_INDEX=3
+    export NCCL_IB_DISABLE=1
+    export NCCL_P2P_DISABLE=1
+    export NCCL_SOCKET_IFNAME=eth1
+else
+    export NCCL_IB_GID_INDEX=3
+    export NCCL_IB_SL=3
+    export NCCL_CHECKS_DISABLE=1
+    export NCCL_P2P_DISABLE=0
+    export NCCL_IB_DISABLE=0
+    export NCCL_LL_THRESHOLD=16384
+    export NCCL_IB_CUDA_SUPPORT=1
+    export NCCL_SOCKET_IFNAME=bond1
+    export UCX_NET_DEVICES=bond1
+    export NCCL_IB_HCA=mlx5_bond_1,mlx5_bond_5,mlx5_bond_3,mlx5_bond_7,mlx5_bond_4,mlx5_bond_8,mlx5_bond_2,mlx5_bond_6
+    export NCCL_COLLNET_ENABLE=0
+    export SHARP_COLL_ENABLE_SAT=0
+    export NCCL_NET_GDR_LEVEL=2
+    export NCCL_IB_QPS_PER_CONNECTION=4
+    export NCCL_IB_TC=160
+    export NCCL_PXN_DISABLE=1
+    export GLOO_SOCKET_IFNAME=bond1
+    export NCCL_DEBUG=info
+fi
+
+export TRANSFORMERS_CACHE=$PWD/work_dirs/.cache/transformers
+export TORCH_HOME=$PWD/work_dirs/.cache/torch
+export CLIP_CACHE=$PWD/work_dirs/.cache/clip
+export HF_HOME=$PWD/work_dirs/.cache/hf
+export TOKENIZERS_PARALLELISM=false
+export MKL_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export TORCH_DISTRIBUTED_DEBUG=INFO
+export HF_DATASETS_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+
+export http_proxy="http://star-proxy.oa.com:3128"
+export https_proxy="http://star-proxy.oa.com:3128"
+export ftp_proxy="http://star-proxy.oa.com:3128"
+export no_proxy=".woa.com,mirrors.cloud.tencent.com,tlinux-mirror.tencent-cloud.com,tlinux-mirrorlist.tencent-cloud.com,localhost,127.0.0.1,mirrors-tlinux.tencentyun.com,.oa.com,.local,.3gqq.com,.7700.org,.ad.com,.ada_sixjoy.com,.addev.com,.app.local,.apps.local,.aurora.com,.autotest123.com,.bocaiwawa.com,.boss.com,.cdc.com,.cdn.com,.cds.com,.cf.com,.cjgc.local,.cm.com,.code.com,.datamine.com,.dvas.com,.dyndns.tv,.ecc.com,.expochart.cn,.expovideo.cn,.fms.com,.great.com,.hadoop.sec,.heme.com,.home.com,.hotbar.com,.ibg.com,.ied.com,.ieg.local,.ierd.com,.imd.com,.imoss.com,.isd.com,.isoso.com,.itil.com,.kao5.com,.kf.com,.kitty.com,.lpptp.com,.m.com,.matrix.cloud,.matrix.net,.mickey.com,.mig.local,.mqq.com,.oiweb.com,.okbuy.isddev.com,.oss.com,.otaworld.com,.paipaioa.com,.qqbrowser.local,.qqinternal.com,.qqwork.com,.rtpre.com,.sc.oa.com,.sec.com,.server.com,.service.com,.sjkxinternal.com,.sllwrnm5.cn,.sng.local,.soc.com,.t.km,.tcna.com,.teg.local,.tencentvoip.com,.tenpayoa.com,.test.air.tenpay.com,.tr.com,.tr_autotest123.com,.vpn.com,.wb.local,.webdev.com,.webdev2.com,.wizard.com,.wqq.com,.wsd.com,.sng.com,.music.lan,.mnet2.com,.tencentb2.com,.tmeoa.com,.pcg.com,www.wip3.adobe.com,www-mm.wip3.adobe.com,mirrors.tencent.com,csighub.tencentyun.com"
+
+sed -i 's/np.float/float/g' /usr/local/python/lib/python3.8/site-packages/lvis/eval.py
+
+touch /tmp/.unhold
+
+pip3 install -e .
+torchrun --nnodes=$1 --nproc_per_node=$2 --node_rank=$INDEX --master_addr=$CHIEF_IP ${@:3}
+
+rm /tmp/.unhold

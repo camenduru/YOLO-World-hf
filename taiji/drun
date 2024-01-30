@@ -1,0 +1,35 @@
+#!/bin/bash
+DOCKER_IMAGE="mirrors.tencent.com/ronnysong_rd/fastdet:torch2.0.1-cuda11.7"
+
+if [ ! -n "$DEBUG" ]; then
+    COMMAND_PREFIX="pip3 install -e ."
+else
+    COMMAND_PREFIX="pip3 install -q -e third_party/mmengine;
+                    pip3 install -q -e third_party/mmdetection;
+                    pip3 install -q -e third_party/mmcv;
+                    pip3 install -q -e third_party/mmyolo;
+                    pip3 install -q -e ."
+fi
+
+sudo nvidia-docker run \
+    --rm \
+    -it \
+    -e NVIDIA_VISIBLE_DEVICES=all \
+    --env="DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
+    --shm-size=20gb \
+    --network=host \
+    -v /apdcephfs/:/apdcephfs/ \
+    -v /apdcephfs_cq2/:/apdcephfs_cq2/ \
+    -v /apdcephfs_cq3/:/apdcephfs_cq3/ \
+    -v /data/:/data/ \
+    -w $PWD \
+    $DOCKER_IMAGE \
+    bash -c "export TRANSFORMERS_CACHE=$PWD/work_dirs/.cache/transformers;
+             export TORCH_HOME=$PWD/work_dirs/.cache/torch;
+             export CLIP_CACHE=$PWD/work_dirs/.cache/clip;
+             export HF_HOME=$PWD/work_dirs/.cache/hf;
+             export TOKENIZERS_PARALLELISM=false;
+             $COMMAND_PREFIX
+             $*"
