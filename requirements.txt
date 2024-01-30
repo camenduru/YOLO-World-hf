@@ -17,6 +17,7 @@ pot
 sentencepiece
 tokenizers
 onnx
-onnx-runtime
+onnxruntime
+onnxruntime-gpu
 onnx-simplifier
 
