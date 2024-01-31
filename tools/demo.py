@@ -4,6 +4,7 @@ import argparse
 import os.path as osp
 from functools import partial
 from io import BytesIO
+from copy import deepcopy
 
 import onnx
 import onnxsim
@@ -101,7 +102,7 @@ def export_model(runner,
         iou_threshold=nms_thr,
         score_threshold=score_thr)
 
-    base_model = runner.model
+    base_model = deepcopy(runner.model)
     texts = [[t.strip() for t in text.split(',')] + [' ']]
     base_model.reparameterize(texts)
     deploy_model = DeployModel(
@@ -133,6 +134,10 @@ def export_model(runner,
         onnx.checker.check_model(onnx_model)
     onnx_model, check = onnxsim.simplify(onnx_model)
     onnx.save(onnx_model, save_onnx_path)
+
+    del base_model
+    del deploy_model
+    del onnx_model
     return gr.update(visible=True), save_onnx_path
 
 
