@@ -116,6 +116,7 @@ def export_model(runner,
     # dry run
     deploy_model(fake_input)
 
+    os.makedirs(args.work_dir, exist_ok=True)
     save_onnx_path = os.path.join(
         args.work_dir,
         os.path.basename(args.checkpoint).replace('pth', 'onnx'))
