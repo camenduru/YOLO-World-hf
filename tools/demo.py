@@ -194,7 +194,7 @@ def demo(runner, args, cfg):
                      [output_image])
         clear.click(lambda: [[], '', ''], None,
                     [image, input_text, output_image])
-        export.click(partial(export_model, runner, cfg.checkpoint),
+        export.click(partial(export_model, runner, args.checkpoint),
                      [input_text, max_num_boxes, score_thr, nms_thr],
                      [out_download, out_download])
         demo.launch(server_name='0.0.0.0')
