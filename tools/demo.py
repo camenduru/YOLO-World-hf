@@ -155,7 +155,7 @@ def demo(runner, args):
                     clear = gr.Button('Clear')
                 with gr.Row():
                     export = gr.Button('Deploy and Export ONNX Model')
-                out_download = gr.File(lines=1, visible=False)
+                out_download = gr.File(visible=False)
                 max_num_boxes = gr.Slider(
                     minimum=1,
                     maximum=300,
@@ -179,7 +179,6 @@ def demo(runner, args):
                     label='NMS Threshold')
             with gr.Column(scale=0.7):
                 output_image = gr.Image(
-                    lines=20,
                     type='pil',
                     label='output image')
 

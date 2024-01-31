@@ -7,7 +7,7 @@ pinned: false
 license: apache-2.0
 app_file: app.py
 sdk: gradio
-sdk_version: 3.35.2
+sdk_version: 4.16.0
 ---
 
 <div align="center">
