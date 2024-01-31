@@ -21,7 +21,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='YOLO-World Demo')
     parser.add_argument('--config', default='configs/pretrain/yolo_world_l_t2i_bn_2e-4_100e_4x8gpus_obj365v1_goldg_train_lvis_minival.py')
-    parser.add_argument('--checkpoint', default='model_zoo/yolow-v8_l_clipv2_frozen_t2iv2_bn_o365_goldg_pretrain.pth')
+    parser.add_argument('--checkpoint', default='yolow-v8_l_clipv2_frozen_t2iv2_bn_o365_goldg_pretrain.pth')
     parser.add_argument(
         '--work-dir',
         help='the directory to save the file containing evaluation metrics')
