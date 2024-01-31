@@ -192,7 +192,7 @@ def demo(runner, args):
         export.click(partial(export_model, runner, args.checkpoint),
                      [input_text, max_num_boxes, score_thr, nms_thr],
                      [out_download, out_download])
-        demo.launch(server_name='0.0.0.0', server_port=80)
+        demo.launch(server_name='0.0.0.0')
 
 
 if __name__ == '__main__':
