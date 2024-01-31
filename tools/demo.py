@@ -116,10 +116,9 @@ def export_model(runner,
     # dry run
     deploy_model(fake_input)
 
-    os.makedirs(args.work_dir, exist_ok=True)
+    os.makedirs('work_dirs', exist_ok=True)
     save_onnx_path = os.path.join(
-        args.work_dir,
-        os.path.basename(args.checkpoint).replace('pth', 'onnx'))
+        'work_dirs', 'yolow-l.onnx')
     # export onnx
     with BytesIO() as f:
         output_names = ['num_dets', 'boxes', 'scores', 'labels']
@@ -142,7 +141,7 @@ def export_model(runner,
     return gr.update(visible=True), save_onnx_path
 
 
-def demo(runner, args):
+def demo(runner, args, cfg):
     with gr.Blocks(title="YOLO-World") as demo:
         with gr.Row():
             gr.Markdown('<h1><center>YOLO-World: Real-Time Open-Vocabulary '
@@ -195,7 +194,7 @@ def demo(runner, args):
                      [output_image])
         clear.click(lambda: [[], '', ''], None,
                     [image, input_text, output_image])
-        export.click(partial(export_model, runner, args.checkpoint),
+        export.click(partial(export_model, runner, cfg.checkpoint),
                      [input_text, max_num_boxes, score_thr, nms_thr],
                      [out_download, out_download])
         demo.launch(server_name='0.0.0.0')
@@ -228,4 +227,4 @@ if __name__ == '__main__':
     pipeline = cfg.test_dataloader.dataset.pipeline
     runner.pipeline = Compose(pipeline)
     runner.model.eval()
-    demo(runner, args)
+    demo(runner, args, cfg)
