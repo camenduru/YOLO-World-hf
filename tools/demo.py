@@ -52,6 +52,7 @@ def run_image(runner,
               score_thr,
               nms_thr,
               image_path='./work_dirs/demo.png'):
+    os.makedirs('./work_dirs', exist_ok=True)
     image.save(image_path)
     texts = [[t.strip()] for t in text.split(',')] + [[' ']]
     data_info = dict(img_id=0, img_path=image_path, texts=texts)
@@ -202,6 +203,7 @@ if __name__ == '__main__':
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)
 
+    os.makedirs('./work_dirs', exist_ok=True)
     if args.work_dir is not None:
         cfg.work_dir = args.work_dir
     elif cfg.get('work_dir', None) is None:
