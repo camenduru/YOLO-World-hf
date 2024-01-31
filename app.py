@@ -1,6 +1,5 @@
 import os
-os.system("pip uninstall -y mmcv-full torch torchvision")
-os.system("pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118")
+os.system("pip uninstall -y mmcv-full")
 os.system("mim install 'mmengine>=0.6.0'")
 os.system("mim install 'mmcv>=2.0.0rc4,<2.1.0'")
 os.system("mim install 'mmdet>=3.0.0,<4.0.0'")
