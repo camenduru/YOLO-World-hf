@@ -1,5 +1,5 @@
 openmim
-mmcv>=2.0.0rc4,<2.1.0
+mmcv-lite>=2.0.0rc4,<2.1.0
 mmdet>=3.0.0
 mmengine>=0.7.1
 mmyolo
