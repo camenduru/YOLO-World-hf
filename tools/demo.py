@@ -183,7 +183,7 @@ def demo(runner, args, cfg):
                 nms_thr = gr.Slider(
                     minimum=0,
                     maximum=1,
-                    value=0.7,
+                    value=0.5,
                     step=0.001,
                     interactive=True,
                     label='NMS Threshold')
