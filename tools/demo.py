@@ -161,7 +161,11 @@ def demo(runner, args, cfg):
                     clear = gr.Button('Clear')
                 with gr.Row():
                     export = gr.Button('Deploy and Export ONNX Model')
-                out_download = gr.File(label='Download link', visible=True, height=20)
+                out_download = gr.File(
+                    label='Download link',
+                    visible=True,
+                    height=30,
+                    interactive=False)
                 max_num_boxes = gr.Slider(
                     minimum=1,
                     maximum=300,
