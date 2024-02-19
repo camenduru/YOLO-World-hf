@@ -1,11 +1,11 @@
 import os
-os.system("pip uninstall -y mmcv-full")
-os.system("mim install 'mmengine>=0.6.0'")
-# os.system("pip install mmcv==2.0.1 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html")
-os.system("mim install 'mmcv-lite==2.0.1'")
-os.system("mim install 'mmdet>=3.0.0,<4.0.0'")
-os.system("mim install 'mmyolo'")
-os.system("pip install -e .")
+# os.system("pip uninstall -y mmcv-full")
+# os.system("mim install 'mmengine>=0.6.0'")
+# # os.system("pip install mmcv==2.0.1 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html")
+# os.system("mim install 'mmcv-lite==2.0.1'")
+# os.system("mim install 'mmdet>=3.0.0,<4.0.0'")
+# os.system("mim install 'mmyolo'")
+# os.system("pip install -e .")
 
 import argparse
 import os.path as osp
