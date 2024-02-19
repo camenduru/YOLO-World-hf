@@ -186,5 +186,4 @@ if __name__ == '__main__':
         author='Tencent AILab',
         author_email='ronnysong@tencent.com',
         license='Apache License 2.0',
-        install_requires=parse_requirements('requirements.txt'),
         zip_safe=False)

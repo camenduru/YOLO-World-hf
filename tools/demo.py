@@ -158,7 +158,6 @@ def demo(runner, args, cfg):
                     elem_id='textbox')
                 with gr.Row():
                     submit = gr.Button('Submit')
-                    clear = gr.Button('Clear')
                 with gr.Row():
                     export = gr.Button('Deploy and Export ONNX Model')
                 out_download = gr.File(
@@ -191,13 +190,12 @@ def demo(runner, args, cfg):
                 output_image = gr.Image(
                     type='pil',
                     label='output image')
+                gr.ClearButton(image, input_text, output_image)
 
         submit.click(partial(run_image, runner),
                      [image, input_text, max_num_boxes,
                       score_thr, nms_thr],
                      [output_image])
-        clear.click(lambda: [[], '', ''], None,
-                    [image, input_text, output_image])
         export.click(partial(export_model, runner, args.checkpoint),
                      [input_text, max_num_boxes, score_thr, nms_thr],
                      [out_download, out_download])
